@@ -1,8 +1,8 @@
 import json
+import certifi
 from flask import Flask, request
 from bson import json_util
 from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 from dotenv import dotenv_values
 from utils import (
     AirBnBListing,
@@ -16,7 +16,7 @@ app = Flask(__name__)
 config = dotenv_values()
 
 # Create a new client and connect to the server
-client = MongoClient(config["uri"], server_api=ServerApi("1"))
+client = MongoClient(config["uri"], tlsCAFile=certifi.where())
 db = client.sample_airbnb
 listingsAndReviews = db.listingsAndReviews
 

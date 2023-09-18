@@ -70,12 +70,10 @@ def get_value(request_body, key):
 
 def validate_listing(listing):
     for field in required_fields:
-        print(field)
         if field == "country":
             if vars(listing)["address"]["country"] == "":
                 return False
         elif vars(listing)[field] == "":
-            print(field)
             return False
     return True
 
