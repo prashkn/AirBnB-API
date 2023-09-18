@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "f5c6d511-885e-48a7-a877-19ee5acd930c",
+		"name": "PeopleWeave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12703709"
+	},
+	"item": [
+		{
+			"name": "Listing:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:105/listing/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "105",
+					"path": [
+						"listing",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:105/listing/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "105",
+					"path": [
+						"listing",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Cozy studio in the heart of UIUC",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "125",
+							"type": "text"
+						},
+						{
+							"key": "property_type",
+							"value": "Studio",
+							"type": "text"
+						},
+						{
+							"key": "room_type",
+							"value": "Entire home/apartment",
+							"type": "text"
+						},
+						{
+							"key": "accommodates",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "bedrooms",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "beds",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "bathrooms",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "United States",
+							"type": "text"
+						},
+						{
+							"key": "amenities",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "minimum_nights",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "extra_people",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "guests_included",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:105/listing/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "105",
+					"path": [
+						"listing",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Competitive Listing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Cozy studio in the heart of UIUC",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "125",
+							"type": "text"
+						},
+						{
+							"key": "property_type",
+							"value": "Studio",
+							"type": "text"
+						},
+						{
+							"key": "room_type",
+							"value": "Entire home/apartment",
+							"type": "text"
+						},
+						{
+							"key": "accommodates",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "bedrooms",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "beds",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "bathrooms",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "United States",
+							"type": "text"
+						},
+						{
+							"key": "amenities",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "minimum_nights",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "extra_people",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "guests_included",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:105/competitive-listing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "105",
+					"path": [
+						"competitive-listing"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
