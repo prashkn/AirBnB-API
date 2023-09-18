@@ -83,7 +83,7 @@ def post_listing():
     """
     try:
         item = AirBnBListing(request.form.to_dict())
-        if validate_listing(item):
+        if validate_listing(item) and vars(item)["price"] != "":
             ret = listingsAndReviews.insert_one(vars(item))
             _id = ret.inserted_id
             return {

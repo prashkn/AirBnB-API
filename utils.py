@@ -48,7 +48,6 @@ class AirBnBListing:
 
 required_fields = [
     "name",
-    "price",
     "property_type",
     "room_type",
     "accommodates",
