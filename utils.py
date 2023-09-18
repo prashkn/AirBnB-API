@@ -1,6 +1,11 @@
+from bson import ObjectId
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+
+
 class AirBnBListing:
     def __init__(self, request_body):
-        self._id = get_value(request_body, "_id")
         self.listing_url = get_value(request_body, "listing_url")
         self.name = get_value(request_body, "name")
         self.summary = get_value(request_body, "summary")
@@ -37,10 +42,11 @@ class AirBnBListing:
         self.availability = get_value(request_body, "availability")
         self.review_scores = get_value(request_body, "review_scores")
         self.reviews = get_value(request_body, "reviews")
+        self.extra_people = get_value(request_body, "extra_people")
+        self.address = {"country": get_value(request_body, "country")}
 
 
 required_fields = [
-    "listing_url",
     "name",
     "price",
     "property_type",
@@ -49,85 +55,58 @@ required_fields = [
     "bedrooms",
     "beds",
     "bathrooms",
+    "country",
+    "minimum_nights",
+    "guests_included",
+    "extra_people",
+    "amenities",
 ]
-
-# valid_fields = [
-#     "_id",
-#     "listing_url",
-#     "name",
-#     "summary",
-#     "space",
-#     "description",
-#     "neighborhood_overview",
-#     "notes",
-#     "transit",
-#     "access",
-#     "interaction",
-#     "house_rules",
-#     "property_type",
-#     "room_type",
-#     "bed_type",
-#     "minimum_nights",
-#     "maximum_nights",
-#     "cancellation_policy",
-#     "last_scraped",
-#     "calendar_last_scraped",
-#     "accommodates",
-#     "bedrooms",
-#     "beds",
-#     "number_of_reviews",
-#     "bathrooms",
-#     "amenities",
-#     "price",
-#     "weekly_price",
-#     "monthly_price",
-#     "cleaning_fee",
-#     "extra_people",
-#     "guests_included",
-#     "images",
-#     "host",
-#     "address",
-#     "availability",
-#     "review_scores",
-#     "reviews",
-# ]
 
 
 def get_value(request_body, key):
-    return request_body[key] if key in request_body else ""
-
-
-def print_listing(listing):
-    item = {}
-    for key, val in vars(listing).items():
-        item[key] = str(val)
-    return item
+    if request_body is None or key not in request_body:
+        return ""
+    return request_body[key]
 
 
 def validate_listing(listing):
     for field in required_fields:
-        if field not in vars(listing).keys():
+        print(field)
+        if field == "country":
+            if vars(listing)["address"]["country"] == "":
+                return False
+        elif vars(listing)[field] == "":
+            print(field)
             return False
     return True
 
 
-# def validate_listing(request_body):
-#     for required_field in Listing.get_required_fields():
-#         if required_field not in request_body.keys():
-#             return str(
-#                 {
-#                     "error": "request body does not contain "
-#                     + required_field
-#                     + ", a required field."
-#                 }
-#             )
+def get_id(id):
+    try:
+        return ObjectId(id)
+    except:
+        return id
 
-#     for field in request_body.keys():
-#         if field not in valid_fields:
-#             return str(
-#                 {
-#                     "error": field
-#                     + " is not a valid field. Valid fields include "
-#                     + str(valid_fields)
-#                 }
-#             )
+
+def create_linear_regression(documents):
+    # convert list of dictionaries to a dataframe and replace any NaN with 0
+    df = pd.DataFrame(documents).fillna(0)
+
+    # replace "price" and "cleaning_fee" fields with a "total_price" field
+    df["total_price"] = df["price"] + df["cleaning_fee"]
+    df = df.drop(columns=["price", "cleaning_fee"], axis=1)
+
+    # define the independent features
+    x_cols = list(df.columns)
+    x_cols.remove("total_price")
+
+    # create linear regression model
+    regr = linear_model.LinearRegression()
+    regr.fit(df[x_cols], df["total_price"])
+
+    # create a map between column name and coeff
+    feat_to_coef = {}
+    for feat, coef in zip(x_cols, regr.coef_):
+        feat_to_coef[feat] = coef
+
+    return regr.intercept_, feat_to_coef
