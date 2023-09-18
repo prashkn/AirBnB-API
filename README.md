@@ -4,9 +4,9 @@ Take home assignment for PeopleWeave. REST API with simple database. Python, Fla
 
 ## Running the server
 
-Run `server.py` to run the server.
+Run `server.py` to run the server. **Please note that you will have to install all the imported libraries before you can run the server. This includes libraries such as flask, bson, pymongo, python-dotenv, pandas, matplotlib, and scikit-learn.**
 
-From there, you can run the below endpoints using Postman or Insomnia with the base url `http://localhost:105/`.
+From there, you can run the below endpoints using Postman or Insomnia with the base url `http://localhost:105/`. **Please note that you cannot use the Postman Web Version to make requests to your local host. You would need the Desktop Version to make requests to localhost, or configure the Web Version separately. It is recommended to have the Desktop version.**
 
 If you want, I exported my requests on postman so you can easily test out the API for yourself. The json is in this repo, at `AirBnBPostmanRequests.json`.
 
@@ -14,11 +14,11 @@ If you want, I exported my requests on postman so you can easily test out the AP
 
 ### **GET** `/listing/{id}`
 
-Given an `id,` return a single item
+Given an `id`, return a single item.
 
 ### **DELETE** `/listing/{id}`
 
-Given an `id`, delete and return a single item
+Given an `id`, delete and return a single item.
 
 ### **POST** `/listing`
 
