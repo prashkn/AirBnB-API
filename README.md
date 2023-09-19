@@ -1,6 +1,8 @@
 # AirBnB API
 
-Take home assignment for PeopleWeave. REST API with simple database. Python, Flask, MongoDB
+Take home assignment for PeopleWeave. REST API with simple database. Python, Flask, MongoDB.
+
+This submission is also a public repository on my github: https://github.com/prashkn/AirBnB-API
 
 ## Running the server
 
