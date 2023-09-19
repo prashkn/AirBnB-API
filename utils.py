@@ -63,12 +63,31 @@ required_fields = [
 
 
 def get_value(request_body, key):
+    """
+    Given a dictionary and a key, return either a empty string or its value.
+
+    Arguments:
+    request_body - Dictionary
+    key - string
+
+    Returns:
+    string of either the value of the key in the dictionary, or an empty string
+    """
     if request_body is None or key not in request_body:
         return ""
     return request_body[key]
 
 
 def validate_listing(listing):
+    """
+    Returns whether or not a listing object has the required fields
+
+    Arguments:
+    listing - AirBnBListing object
+
+    Returns:
+    boolean
+    """
     for field in required_fields:
         if field == "country":
             if vars(listing)["address"]["country"] == "":
@@ -79,6 +98,15 @@ def validate_listing(listing):
 
 
 def get_id(id):
+    """
+    In this sample dataset, objects can either have a String ID, or an ObjectID ID. This method determines if a listing has a string or ObjectID as its id.
+
+    Arguments:
+    id - String
+
+    Returns:
+    either an ObjectID or a string
+    """
     try:
         return ObjectId(id)
     except:
@@ -86,6 +114,17 @@ def get_id(id):
 
 
 def create_linear_regression(documents):
+    """
+    Creates and returns a linear regression model, fitted to the numerical features of a listing, to best determine the price of a new listing.
+
+    Arguments:
+    documents - list of dictionaries [{}, {}, ...], which each dictionary being a document in the database
+
+    Returns:
+    tuple of float and dictionary:
+    - float - y intercept of the pricing model
+    - dictionary - features (strings) mapped to coefficients (floats)
+    """
     # convert list of dictionaries to a dataframe and replace any NaN with 0
     df = pd.DataFrame(documents).fillna(0)
 
